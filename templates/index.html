@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production Analyser</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Mobile Menu Toggle Button -->
+    <div class="md:hidden fixed top-0 left-0 z-50 p-4">
+        <button id="menu-toggle" class="bg-gray-800 text-white p-2 rounded">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Sidebar -->
+    <nav id="sidebar" class="fixed inset-y-0 left-0 z-40 w-64 bg-gray-800 text-white transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out md:static md:inset-0">
+        <div class="p-4 md:p-6 text-xl md:text-2xl font-bold text-center">Production Analyser</div>
+        <ul class="mt-4 md:mt-6">
+            <li class="mb-2"><a href="/" class="block px-4 md:px-6 py-3 hover:bg-gray-700 transition-colors">Dashboard</a></li>
+            <li class="mb-2"><a href="/cycletime" class="block px-4 md:px-6 py-3 hover:bg-gray-700 transition-colors">CycleTime</a></li>
+            <li class="mb-2"><a href="/faultdelay" class="block px-4 md:px-6 py-3 hover:bg-gray-700 transition-colors">FaultDelay</a></li>
+            <li class="mb-2"><a href="/tipdress" class="block px-4 md:px-6 py-3 hover:bg-gray-700 transition-colors">TipDress</a></li>
+        </ul>
+    </nav>
+
+    <!-- Overlay for mobile -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden"></div>
+
+    <!-- Main Content -->
+    <main class="md:ml-64 p-4 md:p-6 pt-16 md:pt-6">
+        <h1 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6">Dashboard</h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+            <div class="bg-white p-4 md:p-6 rounded-lg shadow-md text-center" id="cycle-time">
+                <div class="text-base md:text-lg font-semibold">Cycle Time</div>
+                <div class="text-xl md:text-2xl font-bold text-blue-600 mt-2"><span>0</span> s</div>
+            </div>
+            <div class="bg-white p-4 md:p-6 rounded-lg shadow-md text-center" id="fault-delay">
+                <div class="text-base md:text-lg font-semibold">Fault Delay</div>
+                <div class="text-xl md:text-2xl font-bold text-blue-600 mt-2"><span>0</span> s</div>
+            </div>
+            <div class="bg-white p-4 md:p-6 rounded-lg shadow-md text-center" id="tip-dress">
+                <div class="text-base md:text-lg font-semibold">Tip Dress</div>
+                <div class="text-xl md:text-2xl font-bold text-blue-600 mt-2"><span>0</span> %</div>
+            </div>
+            <div class="bg-white p-4 md:p-6 rounded-lg shadow-md text-center" id="efficiency">
+                <div class="text-base md:text-lg font-semibold">Efficiency</div>
+                <div class="text-xl md:text-2xl font-bold text-blue-600 mt-2"><span>0</span> %</div>
+            </div>
+            <div class="bg-white p-4 md:p-6 rounded-lg shadow-md text-center" id="downtime">
+                <div class="text-base md:text-lg font-semibold">Downtime</div>
+                <div class="text-xl md:text-2xl font-bold text-blue-600 mt-2"><span>0</span> min</div>
+            </div>
+            <div class="bg-white p-4 md:p-6 rounded-lg shadow-md text-center" id="output-rate">
+                <div class="text-base md:text-lg font-semibold">Output Rate</div>
+                <div class="text-xl md:text-2xl font-bold text-blue-600 mt-2"><span>0</span> units/h</div>
+            </div>
+            <div class="bg-white p-4 md:p-6 rounded-lg shadow-md text-center" id="quality-score">
+                <div class="text-base md:text-lg font-semibold">Quality Score</div>
+                <div class="text-xl md:text-2xl font-bold text-blue-600 mt-2"><span>0</span> /100</div>
+            </div>
+            <div class="bg-white p-4 md:p-6 rounded-lg shadow-md text-center" id="energy-consumption">
+                <div class="text-base md:text-lg font-semibold">Energy Consumption</div>
+                <div class="text-xl md:text-2xl font-bold text-blue-600 mt-2"><span>0</span> kWh</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+        });
+    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
