@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Update parameters every 2 seconds
-    setInterval(updateParameters, 2000);
+    setInterval(updateParameters, 3000);
 
     // Initial update
     updateParameters();

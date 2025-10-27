@@ -1,7 +1,5 @@
-# TODO: Make App Responsive for All Devices
-
-- [x] Update templates/index.html for responsive design
-- [x] Update templates/cycletime.html for responsive design
-- [x] Update templates/faultdelay.html for responsive design
-- [x] Update templates/tipdress.html for responsive design
-- [x] Run the app and verify responsiveness
+- [x] Update nav class in templates/index.html to remove md:static md:inset-0
+- [x] Update nav class in templates/cycletime.html to remove md:static md:inset-0
+- [x] Update nav class in templates/faultdelay.html to remove md:static md:inset-0
+- [x] Update nav class in templates/tipdress.html to remove md:static md:inset-0
+- [x] Test the responsive navbar by running the app
