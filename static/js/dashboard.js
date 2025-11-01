@@ -1,46 +1,136 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const themeSelect = document.getElementById('theme-select');
-    const terminalLog = document.getElementById('terminal-log');
+    // Theme Switcher
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
 
-    // Set initial theme
-    document.body.classList.add(localStorage.getItem('theme') || 'light');
-    themeSelect.value = localStorage.getItem('theme') || 'light';
-
-    // Theme switcher
-    themeSelect.addEventListener('change', () => {
-        document.body.classList.remove('light', 'dark');
-        document.body.classList.add(themeSelect.value);
-        localStorage.setItem('theme', themeSelect.value);
-        log('Theme changed to ' + themeSelect.value);
+    themeToggle.addEventListener('change', () => {
+        if (themeToggle.checked) {
+            body.classList.remove('light');
+            body.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            body.classList.remove('dark');
+            body.classList.add('light');
+            localStorage.setItem('theme', 'light');
+        }
     });
 
-    // Logging function
-    function log(message) {
-        const p = document.createElement('p');
-        p.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
-        terminalLog.appendChild(p);
-        terminalLog.scrollTop = terminalLog.scrollHeight;
-    }
-
-    // Initial log message
-    log('Production Analyser initialized.');
-
-    // Example of updating a parameter
-    function updateParameter(id, value) {
-        const element = document.getElementById(id);
-        if (element) {
-            element.textContent = value;
-            log(`Parameter ${id} updated to ${value}`);
-        } else {
-            log(`Element with id ${id} not found.`);
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        body.classList.add(savedTheme);
+        if (savedTheme === 'dark') {
+            themeToggle.checked = true;
         }
     }
 
-    // Simulate live data updates
-    setInterval(() => {
-        updateParameter('oee-value', (Math.random() * 100).toFixed(2) + '%');
-        updateParameter('shift-a-prod-value', Math.floor(Math.random() * 5000));
-        updateParameter('shift-b-prod-value', Math.floor(Math.random() * 4800));
-        updateParameter('downtime-value', (Math.random() * 5).toFixed(2) + ' hours');
-    }, 5000);
+    // Sidebar Toggle
+    const sidebarToggle = document.querySelector('.sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    sidebarToggle.addEventListener('click', () => {
+        sidebar.style.width = sidebar.style.width === '80px' ? '250px' : '80px';
+    });
+
+    // Sidebar Navigation
+    function setActiveSidebarLink() {
+        const path = window.location.pathname;
+        const menu = document.getElementById('sidebar-menu');
+        const links = menu.querySelectorAll('a');
+
+        links.forEach(link => {
+            const li = link.parentElement;
+            if (link.getAttribute('href') === path) {
+                li.classList.add('active');
+            } else {
+                li.classList.remove('active');
+            }
+        });
+    }
+
+    // Handle navigation clicks
+    const sidebarMenu = document.getElementById('sidebar-menu');
+    sidebarMenu.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link && link.getAttribute('href') !== '#') {
+            e.preventDefault();
+            window.location.href = link.getAttribute('href');
+        }
+    });
+
+    // Set the active link on page load
+    setActiveSidebarLink();
+
+    // Generic function to extract data from an HTML table
+    function getTableData(tableId, dataColumnIndex) {
+        const table = document.getElementById(tableId);
+        if (!table) return [];
+        const rows = table.querySelectorAll('tbody tr');
+        const data = [];
+        rows.forEach(row => {
+            const cell = row.cells[dataColumnIndex];
+            if (cell) {
+                data.push(parseFloat(cell.textContent));
+            }
+        });
+        return data;
+    }
+    
+    function renderCycleTimeChart() {
+        const ctx = document.getElementById('cycle-time-chart')?.getContext('2d');
+        if (!ctx) return;
+
+        const cycleTimes = getTableData('cycle-time-table', 2); // 2 is the index of 'Cycle_Time_Sec'
+        if (cycleTimes.length === 0) return;
+
+        // Create a histogram
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: cycleTimes.map((_, i) => i + 1),
+                datasets: [{
+                    label: 'Cycle Time (seconds)',
+                    data: cycleTimes,
+                    backgroundColor: '#2575fc'
+                }]
+            },
+            options: {
+                scales: {
+                    x: { title: { display: true, text: 'Part' } },
+                    y: { title: { display: true, text: 'Cycle Time (s)' } }
+                }
+            }
+        });
+    }
+
+    function renderTipDressChart() {
+        const ctx = document.getElementById('tip-dress-chart')?.getContext('2d');
+        if (!ctx) return;
+
+        const tipLifeCycles = getTableData('tip-dress-table', 2); // 2 is the index of 'Tip_Life_Cycles'
+        if (tipLifeCycles.length === 0) return;
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: tipLifeCycles.map((_, i) => `Dress ${i + 1}`),
+                datasets: [{
+                    label: 'Tip Life (Cycles)',
+                    data: tipLifeCycles,
+                    borderColor: '#6a11cb',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    x: { title: { display: true, text: 'Dress Count' } },
+                    y: { title: { display: true, text: 'Cycles' } }
+                }
+            }
+        });
+    }
+
+    // Render charts on the appropriate pages
+    renderCycleTimeChart();
+    renderTipDressChart();
 });

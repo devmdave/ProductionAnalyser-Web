@@ -3,51 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Production Analyser</title>
+    <title>Production Analyzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-    <div class="dashboard-container">
-        <header class="header">
-            <h1>Production Analyser</h1>
-            <div class="theme-options">
-                <label for="theme-select">Theme:</label>
-                <select id="theme-select">
-                    <option value="light">Light</option>
-                    <option value="dark">Dark</option>
-                </select>
+<body class="light">
+    <div class="container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="#" class="logo">
+                    <i data-feather="bar-chart-2"></i>
+                    <span>Prod-Analyzer</span>
+                </a>
             </div>
-        </header>
+            <ul class="sidebar-menu" id="sidebar-menu">
+                <li><a href="/"><i data-feather="grid"></i><span>Dashboard</span></a></li>
+                <li><a href="/fault-delay"><i data-feather="alert-circle"></i><span>Fault/Delay</span></a></li>
+                <li><a href="/cycle-time"><i data-feather="watch"></i><span>Cycle Time</span></a></li>
+                <li><a href="/tip-dress"><i data-feather="trending-up"></i><span>Tip Dress</span></a></li>
+                <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>
+            </ul>
+        </nav>
         <main class="main-content">
-            <div class="parameter-grid">
-                <div class="grid-item">
-                    <h2>OEE</h2>
-                    <p id="oee-value">--</p>
+            <header class="header">
+                <div class="header-left">
+                    <button class="sidebar-toggle"><i data-feather="menu"></i></button>
+                    <div class="search-box">
+                        <i data-feather="search"></i>
+                        <input type="text" placeholder="Search...">
+                    </div>
                 </div>
-                <div class="grid-item">
-                    <h2>Shift A Prod</h2>
-                    <p id="shift-a-prod-value">--</p>
+                <div class="header-right">
+                    <div class="theme-switcher">
+                        <i data-feather="sun" class="light-icon"></i>
+                        <label class="switch">
+                            <input type="checkbox" id="theme-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                        <i data-feather="moon" class="dark-icon"></i>
+                    </div>
                 </div>
-                <div class="grid-item">
-                    <h2>Shift B Prod</h2>
-                    <p id="shift-b-prod-value">--</p>
+            </header>
+            {% block content %}
+            <div class="dashboard-overview">
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="card-icon"><i data-feather="box"></i></div>
+                        <div class="card-content">
+                            <p>Total Units Produced</p>
+                            <h3>1,250,000</h3>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="card-icon"><i data-feather="trending-up"></i></div>
+                        <div class="card-content">
+                            <p>Efficiency</p>
+                            <h3>98.5%</h3>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="card-icon"><i data-feather="alert-triangle"></i></div>
+                        <div class="card-content">
+                            <p>Downtime Hours</p>
+                            <h3>12.5h</h3>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="card-icon"><i data-feather="check-circle"></i></div>
+                        <div class="card-content">
+                            <p>Yield Rate</p>
+                            <h3>99.2%</h3>
+                        </div>
+                    </div>
                 </div>
-                <div class="grid-item">
-                    <h2>Downtime</h2>
-                    <p id="downtime-value">--</p>
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h3>Production Trends</h3>
+                        <canvas id="production-trends-chart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Daily Production</h3>
+                        <canvas id="daily-production-chart"></canvas>
+                    </div>
+                </div>
+                <div class="widgets-grid">
+                    <div class="chart-container">
+                        <h3>Resource Utilization</h3>
+                        <canvas id="resource-utilization-chart"></canvas>
+                    </div>
+                    <div class="widget-container">
+                        <h3>Machine Health</h3>
+                        <div class="machine-status">
+                            <div class="status-item"><span class="status-indicator green"></span> Machine A-101</div>
+                            <div class="status-item"><span class="status-indicator green"></span> Machine A-102</div>
+                            <div class="status-item"><span class="status-indicator yellow"></span> Machine B-201</div>
+                            <div class="status-item"><span class="status-indicator red"></span> Machine C-301</div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="reports-section">
+                    <h3>Export Reports</h3>
+                    <button class="export-btn"><i data-feather="file"></i> Export as CSV</button>
+                    <button class="export-btn"><i data-feather="file-text"></i> Export as PDF</button>
                 </div>
             </div>
+            {% endblock %}
         </main>
-        <footer class="footer">
-            <div class="terminal">
-                <div class="terminal-header">
-                    <p>Log</p>
-                </div>
-                <div class="terminal-body" id="terminal-log">
-                </div>
-            </div>
-        </footer>
     </div>
+    <script>
+        feather.replace()
+    </script>
     <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 </body>
 </html>

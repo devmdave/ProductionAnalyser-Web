@@ -1,28 +1,87 @@
 :root {
-    --background-color-light: #f4f4f9;
-    --text-color-light: #333;
-    --header-bg-light: #fff;
-    --grid-item-bg-light: #fff;
-    --terminal-bg-light: #e0e0e0;
+    --primary-color: #6a11cb;
+    --secondary-color: #2575fc;
+    --accent-gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    --font-family: 'Poppins', sans-serif;
 
-    --background-color-dark: #121212;
-    --text-color-dark: #e0e0e0;
+    /* Light Theme */
+    --bg-color-light: #f0f2f5;
+    --sidebar-bg-light: #ffffff;
+    --header-bg-light: #ffffff;
+    --card-bg-light: #ffffff;
+    --text-primary-light: #1c1c1e;
+    --text-secondary-light: #6e6e73;
+    --border-color-light: #e0e0e0;
+
+    /* Dark Theme */
+    --bg-color-dark: #121212;
+    --sidebar-bg-dark: #1e1e1e;
     --header-bg-dark: #1e1e1e;
-    --grid-item-bg-dark: #1e1e1e;
-    --terminal-bg-dark: #2c2c2c;
+    --card-bg-dark: #2c2c2e;
+    --text-primary-dark: #f5f5f7;
+    --text-secondary-dark: #a0a0a5;
+    --border-color-dark: #3a3a3c;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--font-family);
     margin: 0;
-    padding: 0;
     transition: background-color 0.3s, color 0.3s;
 }
 
-.dashboard-container {
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    transition: width 0.3s;
+    overflow: hidden;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 1rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.logo i {
+    margin-right: 0.5rem;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0 1rem;
+}
+
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    padding: 0.9rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.sidebar-menu li a i {
+    margin-right: 1rem;
+}
+
+.main-content {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    height: 100vh;
 }
 
 .header {
@@ -30,95 +89,242 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-.main-content {
-    flex-grow: 1;
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-toggle {
+    background: none; 
+    border: none; 
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    padding: 0.5rem 0.5rem 0.5rem 2.5rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color-light);
+    background-color: transparent;
+}
+
+.search-box i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.theme-switcher {
+    display: flex;
+    align-items: center;
+    margin-right: 1.5rem;
+}
+
+.theme-switcher .switch {
+    margin: 0 0.5rem;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 1.5rem;
+}
+
+.user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.dashboard-overview {
     padding: 2rem;
-    overflow-y: auto;
+    flex: 1;
 }
 
-.parameter-grid {
+.kpi-grid, .charts-grid, .widgets-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
-.grid-item {
+.kpi-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.kpi-card {
     padding: 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    background: var(--accent-gradient);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.kpi-card .card-icon {
+    font-size: 2rem;
+    margin-right: 1rem;
+    opacity: 0.8;
+}
+
+.kpi-card h3 {
+    margin: 0.25rem 0 0;
+    font-size: 2rem;
+}
+
+.kpi-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.charts-grid {
+     grid-template-columns: 2fr 1fr;
+}
+
+.widgets-grid {
+    grid-template-columns: 1fr 1fr;
+}
+
+.chart-container, .widget-container {
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.machine-status .status-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 0.75rem;
+}
+.green { background-color: #28a745; }
+.yellow { background-color: #ffc107; }
+.red { background-color: #dc3545; }
+
+.export-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    cursor: pointer;
+    margin-right: 1rem;
 }
 
-.grid-item h2 {
-    margin-top: 0;
+/* Theme Colors */
+.light {
+    background-color: var(--bg-color-light);
+    color: var(--text-primary-light);
+}
+.light .sidebar, .light .header, .light .chart-container, .light .widget-container {
+    background-color: var(--card-bg-light);
+}
+.light .sidebar-menu li a { color: var(--text-secondary-light); }
+.light .sidebar-menu li.active a { color: var(--primary-color); background-color: #eef2ff; }
+
+.dark {
+    background-color: var(--bg-color-dark);
+    color: var(--text-primary-dark);
+}
+.dark .sidebar { background-color: var(--sidebar-bg-dark); }
+.dark .header, .dark .chart-container, .dark .widget-container { 
+    background-color: var(--header-bg-dark); 
+    border-bottom: 1px solid var(--border-color-dark);
+}
+.dark .search-box input { 
+    border-color: var(--border-color-dark); 
+    color: var(--text-primary-dark);
+}
+.dark .sidebar-menu li a { color: var(--text-secondary-dark); }
+.dark .sidebar-menu li.active a { color: #fff; background-color: rgba(255, 255, 255, 0.1); }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar { width: 0; }
+    .header-left .search-box { display: none; }
 }
 
-.footer {
-    padding: 0 2rem 1rem;
+
+.page-content {
+    padding: 2rem;
 }
 
-.terminal {
-    height: 200px;
+.table-container {
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color-light);
+}
+
+table th {
+    font-weight: 600;
+}
+
+.download-options {
+    text-align: right;
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
     border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-decoration: none;
+    font-weight: 500;
+    background: var(--accent-gradient);
+    color: #fff;
+    transition: transform 0.2s;
 }
 
-.terminal-header {
-    padding: 0.5rem 1rem;
-    font-weight: bold;
+.download-btn:hover {
+    transform: translateY(-2px);
 }
 
-.terminal-body {
-    height: calc(100% - 30px);
-    padding: 1rem;
-    overflow-y: auto;
+.light .table-container {
+    background-color: var(--card-bg-light);
 }
 
-/* Light Theme */
-body.light {
-    background-color: var(--background-color-light);
-    color: var(--text-color-light);
+.light table th, .light table td {
+    border-color: var(--border-color-light);
 }
 
-.light .header {
-    background-color: var(--header-bg-light);
+.light tbody tr:hover {
+    background-color: #f9f9f9;
 }
 
-.light .grid-item {
-    background-color: var(--grid-item-bg-light);
+.dark .table-container {
+    background-color: var(--card-bg-dark);
 }
 
-.light .terminal {
-    background-color: var(--terminal-bg-light);
-    color: #333;
+.dark table th, .dark table td {
+    border-color: var(--border-color-dark);
 }
 
-.light .terminal-header {
-    background-color: #ccc;
-}
-
-/* Dark Theme */
-body.dark {
-    background-color: var(--background-color-dark);
-    color: var(--text-color-dark);
-}
-
-.dark .header {
-    background-color: var(--header-bg-dark);
-}
-
-.dark .grid-item {
-    background-color: var(--grid-item-bg-dark);
-}
-
-.dark .terminal {
-    background-color: var(--terminal-bg-dark);
-    color: #e0e0e0;
-}
-
-.dark .terminal-header {
-    background-color: #3e3e3e;
+.dark tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
 }

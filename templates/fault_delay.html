@@ -1,0 +1,30 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+<div class="page-content">
+    <h2>Backup Data - Fault/Delay</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    {% for header in table.columns %}
+                    <th>{{ header }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in table.data %}
+                <tr>
+                    {% for cell in row %}
+                    <td>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="download-options">
+        <a href="/download/faultdelay" class="download-btn">Download All as CSV</a>
+    </div>
+</div>
+{% endblock %}
