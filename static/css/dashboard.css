@@ -1,0 +1,124 @@
+:root {
+    --background-color-light: #f4f4f9;
+    --text-color-light: #333;
+    --header-bg-light: #fff;
+    --grid-item-bg-light: #fff;
+    --terminal-bg-light: #e0e0e0;
+
+    --background-color-dark: #121212;
+    --text-color-dark: #e0e0e0;
+    --header-bg-dark: #1e1e1e;
+    --grid-item-bg-dark: #1e1e1e;
+    --terminal-bg-dark: #2c2c2c;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.parameter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.grid-item {
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.grid-item h2 {
+    margin-top: 0;
+}
+
+.footer {
+    padding: 0 2rem 1rem;
+}
+
+.terminal {
+    height: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.terminal-header {
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+}
+
+.terminal-body {
+    height: calc(100% - 30px);
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+/* Light Theme */
+body.light {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+}
+
+.light .header {
+    background-color: var(--header-bg-light);
+}
+
+.light .grid-item {
+    background-color: var(--grid-item-bg-light);
+}
+
+.light .terminal {
+    background-color: var(--terminal-bg-light);
+    color: #333;
+}
+
+.light .terminal-header {
+    background-color: #ccc;
+}
+
+/* Dark Theme */
+body.dark {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+}
+
+.dark .header {
+    background-color: var(--header-bg-dark);
+}
+
+.dark .grid-item {
+    background-color: var(--grid-item-bg-dark);
+}
+
+.dark .terminal {
+    background-color: var(--terminal-bg-dark);
+    color: #e0e0e0;
+}
+
+.dark .terminal-header {
+    background-color: #3e3e3e;
+}

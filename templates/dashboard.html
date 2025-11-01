@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production Analyser</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <h1>Production Analyser</h1>
+            <div class="theme-options">
+                <label for="theme-select">Theme:</label>
+                <select id="theme-select">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+            </div>
+        </header>
+        <main class="main-content">
+            <div class="parameter-grid">
+                <div class="grid-item">
+                    <h2>OEE</h2>
+                    <p id="oee-value">--</p>
+                </div>
+                <div class="grid-item">
+                    <h2>Shift A Prod</h2>
+                    <p id="shift-a-prod-value">--</p>
+                </div>
+                <div class="grid-item">
+                    <h2>Shift B Prod</h2>
+                    <p id="shift-b-prod-value">--</p>
+                </div>
+                <div class="grid-item">
+                    <h2>Downtime</h2>
+                    <p id="downtime-value">--</p>
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <p>Log</p>
+                </div>
+                <div class="terminal-body" id="terminal-log">
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
