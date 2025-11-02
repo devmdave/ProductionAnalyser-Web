@@ -50,28 +50,46 @@
     <main class="md:ml-64 p-4 md:p-6 pt-20 md:pt-20">
         <h1 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6">TipDress Analysis</h1>
         <p class="text-gray-700 mb-4">Detailed analysis of tip dressing.</p>
-        <!-- Add specific content for TipDress page -->
+        <!-- File Selection -->
+        <div class="card-bg p-4 md:p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-lg md:text-xl font-semibold mb-4 text-dark">Select Excel File</h2>
+            <form method="POST" class="flex flex-col sm:flex-row gap-4">
+                <select name="file" class="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
+                    <option value="">Choose a file...</option>
+                    {% for file in files %}
+                    <option value="{{ file }}" {% if selected_file == file %}selected{% endif %}>{{ file }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Load Data</button>
+            </form>
+        </div>
+
+        <!-- Data Table -->
+        {% if headers %}
         <div class="card-bg p-4 md:p-6 rounded-lg shadow-md">
-            <h2 class="text-lg md:text-xl font-semibold mb-4 text-dark">Tip Dress Metrics</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="p-3 md:p-4 metric-bg-teal rounded">
-                    <div class="text-base md:text-lg font-medium text-dark">Dress Frequency</div>
-                    <div class="text-xl md:text-2xl font-bold text-dark">8 dresses/day</div>
-                </div>
-                <div class="p-3 md:p-4 metric-bg-cyan rounded">
-                    <div class="text-base md:text-lg font-medium text-dark">Average Dress Time</div>
-                    <div class="text-xl md:text-2xl font-bold text-dark">2.5 min</div>
-                </div>
-                <div class="p-3 md:p-4 metric-bg-emerald rounded">
-                    <div class="text-base md:text-lg font-medium text-dark">Tip Wear Rate</div>
-                    <div class="text-xl md:text-2xl font-bold text-dark">0.15 mm/cycle</div>
-                </div>
-                <div class="p-3 md:p-4 metric-bg-lime rounded">
-                    <div class="text-base md:text-lg font-medium text-dark">Dress Efficiency</div>
-                    <div class="text-xl md:text-2xl font-bold text-dark">92.3 %</div>
-                </div>
+            <h2 class="text-lg md:text-xl font-semibold mb-4 text-dark">Tip Dress Data - {{ selected_file }}</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full table-auto border-collapse border border-gray-300 dark:border-gray-600">
+                    <thead class="bg-gray-50 dark:bg-gray-700">
+                        <tr>
+                            {% for header in headers %}
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider border-b border-gray-300 dark:border-gray-600">{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600">
+                        {% for row in data %}
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                            {% for cell in row %}
+                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 border-b border-gray-300 dark:border-gray-600">{{ cell }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
+        {% endif %}
     </main>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
