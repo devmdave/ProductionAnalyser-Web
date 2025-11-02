@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+import openpyxl
 
 app = Flask(__name__)
 
@@ -9,7 +10,17 @@ def dashboard():
 
 @app.route('/cycletime')
 def cycletime():
-    return render_template('cycletime.html')
+    # Load Excel data
+    workbook = openpyxl.load_workbook('data/cycletime.xlsx')
+    sheet = workbook.active
+    data = []
+    headers = []
+    for row in sheet.iter_rows(values_only=True):
+        if not headers:
+            headers = list(row)
+        else:
+            data.append(list(row))
+    return render_template('cycletime.html', headers=headers, data=data)
 
 @app.route('/faultdelay')
 def faultdelay():
