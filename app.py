@@ -11,7 +11,7 @@ def dashboard():
 
 @app.route('/cycletime', methods=['GET', 'POST'])
 def cycletime():
-    data_dir = 'data'
+    data_dir = os.getenv('CYCLETIME_DATA_DIR', 'data')
     files = [f for f in os.listdir(data_dir) if f.endswith('.xlsx')]
     headers = []
     data = []
@@ -32,7 +32,7 @@ def cycletime():
 
 @app.route('/faultdelay', methods=['GET', 'POST'])
 def faultdelay():
-    data_dir = 'faultdelay_data'
+    data_dir = os.getenv('FAULTDELAY_DATA_DIR', 'faultdelay_data')
     files = [f for f in os.listdir(data_dir) if f.endswith('.xlsx')]
     headers = []
     data = []
@@ -53,7 +53,7 @@ def faultdelay():
 
 @app.route('/tipdress', methods=['GET', 'POST'])
 def tipdress():
-    data_dir = 'tipdress_data'
+    data_dir = os.getenv('TIPDRESS_DATA_DIR', 'tipdress_data')
     files = [f for f in os.listdir(data_dir) if f.endswith('.xlsx')]
     headers = []
     data = []
