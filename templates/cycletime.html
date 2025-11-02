@@ -5,25 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Production Analyser - CycleTime</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="bg-gray-100 font-sans">
-    <!-- Mobile Menu Toggle Button -->
-    <div class="md:hidden fixed top-0 left-0 z-50 p-4">
-        <button id="menu-toggle" class="bg-gray-800 text-white p-2 rounded">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-        </button>
-    </div>
+<body class="font-sans">
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <h1 class="text-xl font-bold text-gray-900 dark:text-white">Production Analyser</h1>
+                <button id="theme-toggle" class="p-2 rounded-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                    <svg id="sun-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                    <svg id="moon-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Menu Toggle Button for Mobile/Tablet -->
+    <button id="menu-toggle" class="fixed top-4 left-4 z-50 md:hidden bg-gray-800 text-white p-2 rounded-md shadow-lg">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
 
     <!-- Sidebar -->
-    <nav id="sidebar" class="fixed inset-y-0 left-0 z-40 w-64 bg-gray-800 text-white transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+    <nav id="sidebar" class="fixed inset-y-0 left-0 z-40 w-64 sidebar-bg sidebar-text transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
         <div class="p-4 md:p-6 text-xl md:text-2xl font-bold text-center">Production Analyser</div>
         <ul class="mt-4 md:mt-6">
-            <li class="mb-2"><a href="/" class="block px-4 md:px-6 py-3 hover:bg-gray-700 transition-colors">Dashboard</a></li>
-            <li class="mb-2"><a href="/cycletime" class="block px-4 md:px-6 py-3 hover:bg-gray-700 transition-colors">CycleTime</a></li>
-            <li class="mb-2"><a href="/faultdelay" class="block px-4 md:px-6 py-3 hover:bg-gray-700 transition-colors">FaultDelay</a></li>
-            <li class="mb-2"><a href="/tipdress" class="block px-4 md:px-6 py-3 hover:bg-gray-700 transition-colors">TipDress</a></li>
+            <li class="mb-2"><a href="/" class="block px-4 md:px-6 py-3 sidebar-link transition-colors">Dashboard</a></li>
+            <li class="mb-2"><a href="/cycletime" class="block px-4 md:px-6 py-3 sidebar-link transition-colors">CycleTime</a></li>
+            <li class="mb-2"><a href="/faultdelay" class="block px-4 md:px-6 py-3 sidebar-link transition-colors">FaultDelay</a></li>
+            <li class="mb-2"><a href="/tipdress" class="block px-4 md:px-6 py-3 sidebar-link transition-colors">TipDress</a></li>
         </ul>
     </nav>
 
@@ -31,48 +47,33 @@
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden"></div>
 
     <!-- Main Content -->
-    <main class="md:ml-64 p-4 md:p-6 pt-16 md:pt-6">
-        <h1 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6">CycleTime Analysis</h1>
+    <main class="md:ml-64 p-4 md:p-6 pt-20 md:pt-20">
+        <h1 class="text-2xl max-md:ml-[10vw] md:text-3xl font-bold mb-4 md:mb-6">CycleTime Analysis</h1>
         <p class="text-gray-700 mb-4">Detailed analysis of cycle times.</p>
         <!-- Add specific content for CycleTime page -->
-        <div class="bg-white p-4 md:p-6 rounded-lg shadow-md">
-            <h2 class="text-lg md:text-xl font-semibold mb-4">Cycle Time Metrics</h2>
+        <div class="card-bg p-4 md:p-6 rounded-lg shadow-md">
+            <h2 class="text-lg md:text-xl font-semibold mb-4 text-dark">Cycle Time Metrics</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="p-3 md:p-4 bg-blue-50 rounded">
-                    <div class="text-base md:text-lg font-medium">Average Cycle Time</div>
-                    <div class="text-xl md:text-2xl font-bold text-blue-600">12.5 s</div>
+                <div class="p-3 md:p-4 metric-bg-blue rounded">
+                    <div class="text-base md:text-lg font-medium text-dark">Average Cycle Time</div>
+                    <div class="text-xl md:text-2xl font-bold text-dark">12.5 s</div>
                 </div>
-                <div class="p-3 md:p-4 bg-green-50 rounded">
-                    <div class="text-base md:text-lg font-medium">Min Cycle Time</div>
-                    <div class="text-xl md:text-2xl font-bold text-green-600">8.2 s</div>
+                <div class="p-3 md:p-4 metric-bg-green rounded">
+                    <div class="text-base md:text-lg font-medium text-dark">Min Cycle Time</div>
+                    <div class="text-xl md:text-2xl font-bold text-dark">8.2 s</div>
                 </div>
-                <div class="p-3 md:p-4 bg-red-50 rounded">
-                    <div class="text-base md:text-lg font-medium">Max Cycle Time</div>
-                    <div class="text-xl md:text-2xl font-bold text-red-600">18.7 s</div>
+                <div class="p-3 md:p-4 metric-bg-red rounded">
+                    <div class="text-base md:text-lg font-medium text-dark">Max Cycle Time</div>
+                    <div class="text-xl md:text-2xl font-bold text-dark">18.7 s</div>
                 </div>
-                <div class="p-3 md:p-4 bg-yellow-50 rounded">
-                    <div class="text-base md:text-lg font-medium">Standard Deviation</div>
-                    <div class="text-xl md:text-2xl font-bold text-yellow-600">2.1 s</div>
+                <div class="p-3 md:p-4 metric-bg-yellow rounded">
+                    <div class="text-base md:text-lg font-medium text-dark">Standard Deviation</div>
+                    <div class="text-xl md:text-2xl font-bold text-dark">2.1 s</div>
                 </div>
             </div>
         </div>
     </main>
 
-    <script>
-        // Mobile menu toggle
-        const menuToggle = document.getElementById('menu-toggle');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('-translate-x-full');
-            overlay.classList.toggle('hidden');
-        });
-
-        overlay.addEventListener('click', () => {
-            sidebar.classList.add('-translate-x-full');
-            overlay.classList.add('hidden');
-        });
-    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

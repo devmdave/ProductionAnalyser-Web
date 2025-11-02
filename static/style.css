@@ -1,0 +1,102 @@
+/* Custom theme colors for Production Analyser Web App */
+
+:root {
+  --bg-color: #FFFFFF; /* White background */
+  --sidebar-bg: #002A4D; /* Dark blue for sidebar */
+  --sidebar-hover: #003A5D; /* Lighter blue for hover */
+  --sidebar-pressed: #001A2D; /* Darker blue for pressed */
+  --light-blue: #C6E5F5; /* Light blue for accents */
+  --selected-light-blue: #AAD8F0; /* Another light blue for selected */
+  --text-dark: #002A4D; /* Dark blue for text */
+  --card-bg: #FFFFFF; /* White for cards, or use --light-blue if preferred */
+}
+
+/* Dark mode overrides */
+.dark {
+  --bg-color: #1a1a1a; /* Dark background */
+  --sidebar-bg: #0f172a; /* Darker blue for sidebar */
+  --sidebar-hover: #1e293b; /* Lighter dark blue for hover */
+  --sidebar-pressed: #020617; /* Even darker for pressed */
+  --light-blue: #1e293b; /* Dark accent */
+  --selected-light-blue: #334155; /* Darker selected */
+  --text-dark: #f1f5f9; /* Light text */
+  --card-bg: #0f172a; /* Dark card bg */
+}
+
+/* Body background */
+body {
+  background-color: var(--bg-color) !important;
+}
+
+/* Sidebar */
+.sidebar-bg {
+  background-color: var(--sidebar-bg) !important;
+}
+
+.sidebar-text {
+  color: var(--bg-color) !important;
+}
+
+.sidebar-link:hover {
+  background-color: var(--sidebar-hover) !important;
+}
+
+/* Menu toggle button */
+.menu-toggle-bg {
+  background-color: var(--sidebar-bg) !important;
+}
+
+/* Cards */
+.card-bg {
+  background-color: var(--card-bg) !important;
+}
+
+/* Text colors */
+.text-dark {
+  color: var(--text-dark) !important;
+}
+
+/* Metric boxes in pages */
+.metric-bg-blue {
+  background-color: var(--light-blue) !important;
+}
+
+.metric-bg-green {
+  background-color: #E8F5E8; /* Light green, keeping original */
+}
+
+.metric-bg-red {
+  background-color: #FDECEA; /* Light red, keeping original */
+}
+
+.metric-bg-yellow {
+  background-color: #FEF3C7; /* Light yellow, keeping original */
+}
+
+.metric-bg-orange {
+  background-color: #FFF7ED; /* Light orange, keeping original */
+}
+
+.metric-bg-purple {
+  background-color: #F3E8FF; /* Light purple, keeping original */
+}
+
+.metric-bg-indigo {
+  background-color: #EEF2FF; /* Light indigo, keeping original */
+}
+
+.metric-bg-teal {
+  background-color: #F0FDFA; /* Light teal, keeping original */
+}
+
+.metric-bg-cyan {
+  background-color: #ECFEFF; /* Light cyan, keeping original */
+}
+
+.metric-bg-emerald {
+  background-color: #ECFDF5; /* Light emerald, keeping original */
+}
+
+.metric-bg-lime {
+  background-color: #F7FEE7; /* Light lime, keeping original */
+}
