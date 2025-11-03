@@ -33,30 +33,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const themeToggle = document.getElementById('theme-toggle');
     const sunIcon = document.getElementById('sun-icon');
     const moonIcon = document.getElementById('moon-icon');
-    const body = document.body;
+    const html = document.documentElement;
 
     // Check for saved theme preference or default to light mode
     const currentTheme = localStorage.getItem('theme') || 'light';
     if (currentTheme === 'dark') {
-        body.classList.add('dark');
+        html.classList.add('dark');
         sunIcon.classList.remove('hidden');
         moonIcon.classList.add('hidden');
     } else {
-        body.classList.remove('dark');
+        html.classList.remove('dark');
         sunIcon.classList.add('hidden');
         moonIcon.classList.remove('hidden');
     }
 
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
-            const isDark = body.classList.contains('dark');
+            const isDark = html.classList.contains('dark');
             if (isDark) {
-                body.classList.remove('dark');
+                html.classList.remove('dark');
                 localStorage.setItem('theme', 'light');
                 sunIcon.classList.add('hidden');
                 moonIcon.classList.remove('hidden');
             } else {
-                body.classList.add('dark');
+                html.classList.add('dark');
                 localStorage.setItem('theme', 'dark');
                 sunIcon.classList.remove('hidden');
                 moonIcon.classList.add('hidden');
@@ -81,14 +81,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (themeToggleMobile) {
         themeToggleMobile.addEventListener('click', () => {
-            const isDark = body.classList.contains('dark');
+            const isDark = html.classList.contains('dark');
             if (isDark) {
-                body.classList.remove('dark');
+                html.classList.remove('dark');
                 localStorage.setItem('theme', 'light');
                 sunIconMobile.classList.add('hidden');
                 moonIconMobile.classList.remove('hidden');
             } else {
-                body.classList.add('dark');
+                html.classList.add('dark');
                 localStorage.setItem('theme', 'dark');
                 sunIconMobile.classList.remove('hidden');
                 moonIconMobile.classList.add('hidden');

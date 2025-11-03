@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Production Analyser{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 min-h-screen font-sans">
     <!-- Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/20 dark:bg-gray-800/20 backdrop-blur-md shadow-lg rounded-b-xl border-b border-white/20 dark:border-gray-700/20">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/20 dark:bg-black/20 backdrop-blur-lg shadow-lg rounded-b-xl border border-white/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-2">
@@ -47,7 +52,7 @@
                 </div>
             </div>
             <!-- Mobile menu -->
-            <div id="mobile-menu" class="md:hidden hidden bg-white/20 dark:bg-gray-800/20 backdrop-blur-md rounded-b-xl border-t border-white/20 dark:border-gray-700/20">
+            <div id="mobile-menu" class="md:hidden hidden bg-white/20 dark:bg-black/20 backdrop-blur-lg rounded-b-xl border border-white/30">
                 <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                     <a href="/cycletime" class="text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium transition-colors">CycleTime Backup Analytics</a>
                     <a href="/faultdelay" class="text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium transition-colors">FaultDelay Backup Analytics</a>
@@ -59,7 +64,7 @@
 
     <!-- Main Content -->
     <main class="pt-20 p-4">
-        <div class="bg-white/10 dark:bg-gray-800/10 backdrop-blur-lg rounded-xl shadow-lg p-6">
+        <div class="bg-white/10 dark:bg-black/10 backdrop-blur-lg rounded-xl shadow-lg p-6">
             {% block content %}{% endblock %}
         </div>
     </main>
