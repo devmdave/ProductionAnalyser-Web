@@ -95,4 +95,43 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Function to highlight maximum values in table columns
+    function highlightMaxInColumns() {
+        const tables = document.querySelectorAll('table');
+        tables.forEach(table => {
+            const tbody = table.querySelector('tbody');
+            if (!tbody) return;
+
+            const rows = tbody.querySelectorAll('tr');
+            if (rows.length === 0) return;
+
+            const numCols = rows[0].querySelectorAll('td').length;
+
+            for (let colIndex = 0; colIndex < numCols; colIndex++) {
+                let maxValue = -Infinity;
+                let maxCell = null;
+
+                rows.forEach(row => {
+                    const cell = row.querySelectorAll('td')[colIndex];
+                    if (cell) {
+                        const text = cell.textContent.trim();
+                        const numValue = parseFloat(text);
+                        if (!isNaN(numValue) && numValue > maxValue) {
+                            maxValue = numValue;
+                            maxCell = cell;
+                        }
+                    }
+                });
+
+                if (maxCell) {
+                    maxCell.classList.add('bg-red-500/40', 'text-red-900', 'font-bold', 'rounded');
+                }
+            }
+        });
+    }
+
+    // Highlight max values after data updates
+    setInterval(highlightMaxInColumns, 3000);
+    highlightMaxInColumns(); // Initial call
 });
