@@ -64,28 +64,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Sidebar toggle functionality for all devices
+    // Mobile menu toggle functionality
     const menuToggle = document.getElementById('menu-toggle');
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-    if (menuToggle && sidebar && overlay) {
-        console.log('Menu toggle elements found');
+    if (menuToggle && mobileMenu) {
         menuToggle.addEventListener('click', () => {
-            console.log('Menu toggle clicked');
-            console.log('Sidebar classes before toggle:', sidebar.classList.value);
-            sidebar.classList.toggle('-translate-x-full');
-            console.log('Sidebar classes after toggle:', sidebar.classList.value);
-            overlay.classList.toggle('hidden');
-            menuToggle.classList.add('hidden');
+            mobileMenu.classList.toggle('hidden');
         });
+    }
 
-        overlay.addEventListener('click', () => {
-            sidebar.classList.add('-translate-x-full');
-            overlay.classList.add('hidden');
-            menuToggle.classList.remove('hidden');
+    // Theme toggle for mobile
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+    const sunIconMobile = document.getElementById('sun-icon-mobile');
+    const moonIconMobile = document.getElementById('moon-icon-mobile');
+
+    if (themeToggleMobile) {
+        themeToggleMobile.addEventListener('click', () => {
+            const isDark = body.classList.contains('dark');
+            if (isDark) {
+                body.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                sunIconMobile.classList.add('hidden');
+                moonIconMobile.classList.remove('hidden');
+            } else {
+                body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                sunIconMobile.classList.remove('hidden');
+                moonIconMobile.classList.add('hidden');
+            }
         });
-    } else {
-        console.log('Menu toggle elements not found:', { menuToggle, sidebar, overlay });
     }
 });

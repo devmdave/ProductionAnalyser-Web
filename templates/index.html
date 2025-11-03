@@ -1,90 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Production Analyser</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body class="font-sans">
-    <!-- Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-800 shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <h1 class="text-sm md:text-xl font-bold text-gray-900 dark:text-white max-md:ml-[12vw]">Production Analyser</h1>
-                <button id="theme-toggle" class="p-2 rounded-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                    <svg id="sun-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                    </svg>
-                    <svg id="moon-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </nav>
+{% extends "base.html" %}
 
-    <!-- Menu Toggle Button for Mobile/Tablet -->
-    <button id="menu-toggle" class="fixed top-4 left-4 z-50 md:hidden bg-gray-800 text-white p-2 rounded-md shadow-lg">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-    </button>
+{% block title %}Production Analyser - Dashboard{% endblock %}
 
-    <!-- Sidebar -->
-    <nav id="sidebar" class="fixed inset-y-0 left-0 z-40 w-64 sidebar-bg sidebar-text transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
-        <div class="p-4 md:p-6 text-xl md:text-2xl font-bold text-center">Production Analyser</div>
-        <ul class="mt-4 md:mt-6">
-            <li class="mb-2"><a href="/" class="block px-4 md:px-6 py-3 sidebar-link transition-colors">Dashboard</a></li>
-            <li class="mb-2"><a href="/cycletime" class="block px-4 md:px-6 py-3 sidebar-link transition-colors">CycleTime</a></li>
-            <li class="mb-2"><a href="/faultdelay" class="block px-4 md:px-6 py-3 sidebar-link transition-colors">FaultDelay</a></li>
-            <li class="mb-2"><a href="/tipdress" class="block px-4 md:px-6 py-3 sidebar-link transition-colors">TipDress</a></li>
-        </ul>
-    </nav>
-
-    <!-- Overlay for mobile -->
-    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden"></div>
-
-    <!-- Main Content -->
-    <main class="md:ml-64 max-md:m-0 p-4 md:p-6 pt-20 md:pt-20">
-        <h1 class="text-2xl text-center max-md:p-2 md:text-3xl font-bold mb-4 ">Dashboard</h1>
-        <div class="grid max-md:mt-[4vh] max-md:mx-auto max-md:w-full max-md:items-center max-md:justify-center  max-md:flex max-md:flex-wrap grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-            <div class="card-bg max-md:w-[40vw] p-4 md:p-6 rounded-lg shadow-md text-center" id="cycle-time">
-                <div class="text-base md:text-lg font-semibold text-dark">Cycle Time</div>
-                <div class="text-xl md:text-2xl font-bold text-dark mt-2"><span>0</span> s</div>
-            </div>
-            <div class="card-bg max-md:w-[40vw] p-4 md:p-6 rounded-lg shadow-md text-center" id="fault-delay">
-                <div class="text-base md:text-lg font-semibold text-dark">Fault Delay</div>
-                <div class="text-xl md:text-2xl font-bold text-dark mt-2"><span>0</span> s</div>
-            </div>
-            <div class="card-bg max-md:w-[40vw] p-4 md:p-6 rounded-lg shadow-md text-center" id="tip-dress">
-                <div class="text-base md:text-lg font-semibold text-dark">Tip Dress</div>
-                <div class="text-xl md:text-2xl font-bold text-dark mt-2"><span>0</span> %</div>
-            </div>
-            <div class="card-bg max-md:w-[40vw] p-4 md:p-6 rounded-lg shadow-md text-center" id="efficiency">
-                <div class="text-base md:text-lg font-semibold text-dark">Efficiency</div>
-                <div class="text-xl md:text-2xl font-bold text-dark mt-2"><span>0</span> %</div>
-            </div>
-            <div class="card-bg max-md:w-[40vw] p-4 md:p-6 rounded-lg shadow-md text-center" id="downtime">
-                <div class="text-base md:text-lg font-semibold text-dark">Downtime</div>
-                <div class="text-xl md:text-2xl font-bold text-dark mt-2"><span>0</span> min</div>
-            </div>
-            <div class="card-bg max-md:w-[40vw] p-4 md:p-6 rounded-lg shadow-md text-center" id="output-rate">
-                <div class="text-base md:text-lg font-semibold text-dark">Output Rate</div>
-                <div class="text-xl md:text-2xl font-bold text-dark mt-2"><span>0</span> units/h</div>
-            </div>
-            <div class="card-bg max-md:w-[40vw] p-4 md:p-6 rounded-lg shadow-md text-center" id="quality-score">
-                <div class="text-base md:text-lg font-semibold text-dark">Quality Score</div>
-                <div class="text-xl md:text-2xl font-bold text-dark mt-2"><span>0</span> /100</div>
-            </div>
-            <div class="card-bg max-md:w-[40vw] p-4 md:p-6 rounded-lg shadow-md text-center" id="energy-consumption">
-                <div class="text-base md:text-lg font-semibold text-dark">Energy Consumption</div>
-                <div class="text-xl md:text-2xl font-bold text-dark mt-2"><span>0</span> kWh</div>
-            </div>
-        </div>
-    </main>
-
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-</body>
-</html>
+{% block content %}
+<h1 class="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-white">Dashboard</h1>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center" id="cycle-time">
+        <div class="text-lg font-semibold text-gray-900 dark:text-white">Cycle Time</div>
+        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>0</span> s</div>
+    </div>
+    <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center" id="fault-delay">
+        <div class="text-lg font-semibold text-gray-900 dark:text-white">Fault Delay</div>
+        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>0</span> s</div>
+    </div>
+    <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center" id="tip-dress">
+        <div class="text-lg font-semibold text-gray-900 dark:text-white">Tip Dress</div>
+        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>0</span> %</div>
+    </div>
+    <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center" id="efficiency">
+        <div class="text-lg font-semibold text-gray-900 dark:text-white">Efficiency</div>
+        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>0</span> %</div>
+    </div>
+    <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center" id="downtime">
+        <div class="text-lg font-semibold text-gray-900 dark:text-white">Downtime</div>
+        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>0</span> min</div>
+    </div>
+    <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center" id="output-rate">
+        <div class="text-lg font-semibold text-gray-900 dark:text-white">Output Rate</div>
+        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>0</span> units/h</div>
+    </div>
+    <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center" id="quality-score">
+        <div class="text-lg font-semibold text-gray-900 dark:text-white">Quality Score</div>
+        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>0</span> /100</div>
+    </div>
+    <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center" id="energy-consumption">
+        <div class="text-lg font-semibold text-gray-900 dark:text-white">Energy Consumption</div>
+        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>0</span> kWh</div>
+    </div>
+</div>
+{% endblock %}

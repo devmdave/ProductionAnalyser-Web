@@ -1,11 +1,9 @@
-# TODO: Add Navbar with Theme Toggle
+# TODO: Apply Color Scheme to Web App
 
 ## Tasks
-- [x] Update static/style.css to include dark mode CSS variables under .dark class
-- [x] Add navbar HTML to templates/index.html
-- [x] Add navbar HTML to templates/cycletime.html
-- [x] Add navbar HTML to templates/faultdelay.html
-- [x] Add navbar HTML to templates/tipdress.html
-- [x] Adjust main content padding-top in all templates to account for navbar height
-- [x] Update static/script.js to implement theme toggle logic with localStorage persistence
-- [x] Test theme toggle functionality across all pages (Flask app running on http://127.0.0.1:5000)
+- [x] Update CSS variables in `static/style.css` for light mode to match shared colors
+- [x] Update CSS variables in `static/style.css` for dark mode to match dark theme colors
+- [x] Add table-specific styles in `static/style.css` for light mode using table colors
+- [x] Add table-specific styles in `static/style.css` for dark mode using dark theme colors
+- [x] Update metric background colors in `static/style.css` to match status colors (green, red, yellow)
+- [x] Verify the changes do not alter any HTML elements or functionality
