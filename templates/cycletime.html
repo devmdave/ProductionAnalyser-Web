@@ -9,7 +9,7 @@
 <!-- File Selection -->
 <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 mb-6">
     <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Select Excel File</h2>
-    <form method="POST" class="flex flex-col sm:flex-row gap-4">
+    <form id="cycle-form" method="POST" class="flex flex-col sm:flex-row gap-4">
         <select name="file" class="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white/50 dark:bg-gray-700/50 text-gray-900 dark:text-white">
             <option value="">Choose a file...</option>
             {% for file in files %}
@@ -24,8 +24,13 @@
 {% if headers %}
 <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6">
     <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Cycle Time Data - {{ selected_file }}</h2>
+    <!-- Highlight Input -->
+    <div class="mb-4 flex items-center">
+        <input type="number" id="cycle-input" placeholder="Enter cycle time threshold" class="border rounded px-3 py-2 bg-white/20 backdrop-blur-md text-gray-900 dark:text-white">
+        <button id="highlight-btn" class="ml-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded">Highlight Values</button>
+    </div>
     <div class="overflow-x-auto">
-        <table class="min-w-full table-auto border-collapse border border-gray-300 dark:border-gray-600">
+        <table id="cycle-table" class="min-w-full table-auto border-collapse border border-gray-300 dark:border-gray-600">
             <thead class="bg-gray-50/50 dark:bg-gray-700/50">
                 <tr>
                     {% for header in headers %}
@@ -37,7 +42,7 @@
                 {% for row in data %}
                 <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-700/50">
                     {% for cell in row %}
-                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 border-b border-gray-300 dark:border-gray-600">{{ cell }}</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 border-b border-gray-300 dark:border-gray-600{% if loop.first %} cycle-time-cell{% endif %}">{{ cell }}</td>
                     {% endfor %}
                 </tr>
                 {% endfor %}
@@ -47,3 +52,5 @@
 </div>
 {% endif %}
 {% endblock %}
+
+
