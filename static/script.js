@@ -1,31 +1,41 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Function to generate random data for parameters
-    function updateParameters() {
-        const cycleTimeEl = document.getElementById('cycle-time');
-        const faultDelayEl = document.getElementById('fault-delay');
-        const tipDressEl = document.getElementById('tip-dress');
-        const efficiencyEl = document.getElementById('efficiency');
-        const downtimeEl = document.getElementById('downtime');
-        const outputRateEl = document.getElementById('output-rate');
-        const qualityScoreEl = document.getElementById('quality-score');
-        const energyConsumptionEl = document.getElementById('energy-consumption');
+    // Function to update parameters from /dashboard-data endpoint
+    async function updateParameters() {
+        try {
+            const response = await fetch('/dashboard-data');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
 
-        if (cycleTimeEl) cycleTimeEl.querySelector('span').textContent = (Math.random() * 10 + 5).toFixed(2);
-        if (faultDelayEl) faultDelayEl.querySelector('span').textContent = (Math.random() * 5).toFixed(2);
-        if (tipDressEl) tipDressEl.querySelector('span').textContent = (Math.random() * 100).toFixed(1);
-        if (efficiencyEl) efficiencyEl.querySelector('span').textContent = (Math.random() * 20 + 80).toFixed(1);
-        if (downtimeEl) downtimeEl.querySelector('span').textContent = (Math.random() * 10).toFixed(1);
-        if (outputRateEl) outputRateEl.querySelector('span').textContent = (Math.random() * 50 + 100).toFixed(0);
-        if (qualityScoreEl) qualityScoreEl.querySelector('span').textContent = (Math.random() * 10 + 90).toFixed(1);
-        if (energyConsumptionEl) energyConsumptionEl.querySelector('span').textContent = (Math.random() * 20 + 50).toFixed(1);
+            const cycleTimeEl = document.getElementById('cycle-time');
+            const faultDelayEl = document.getElementById('fault-delay');
+            const tipDressEl = document.getElementById('tip-dress');
+            const efficiencyEl = document.getElementById('efficiency');
+            const downtimeEl = document.getElementById('downtime');
+            const outputRateEl = document.getElementById('output-rate');
+            const qualityScoreEl = document.getElementById('quality-score');
+            const energyConsumptionEl = document.getElementById('energy-consumption');
+
+            if (cycleTimeEl && data.cycleTime !== undefined) cycleTimeEl.querySelector('span').textContent = data.cycleTime.toFixed(2);
+            if (faultDelayEl && data.faultDelay !== undefined) faultDelayEl.querySelector('span').textContent = data.faultDelay.toFixed(2);
+            if (tipDressEl && data.tipDress !== undefined) tipDressEl.querySelector('span').textContent = data.tipDress.toFixed(1);
+            if (efficiencyEl && data.efficiency !== undefined) efficiencyEl.querySelector('span').textContent = data.efficiency.toFixed(1);
+            if (downtimeEl && data.downtime !== undefined) downtimeEl.querySelector('span').textContent = data.downtime.toFixed(1);
+            if (outputRateEl && data.outputRate !== undefined) outputRateEl.querySelector('span').textContent = data.outputRate.toFixed(0);
+            if (qualityScoreEl && data.qualityScore !== undefined) qualityScoreEl.querySelector('span').textContent = data.qualityScore.toFixed(1);
+            if (energyConsumptionEl && data.energyConsumption !== undefined) energyConsumptionEl.querySelector('span').textContent = data.energyConsumption.toFixed(1);
+        } catch (error) {
+            console.error('Error fetching dashboard data:', error);
+        }
     }
 
     try {
         // Initial update
-         // Update parameters every 2 seconds
-        setInterval(updateParameters, 3000);
         updateParameters();
-    }catch (error) {
+        // Update parameters every 1.5 seconds
+        setInterval(updateParameters, 1500);
+    } catch (error) {
         console.error('Error updating parameters:', error);
     }
 
