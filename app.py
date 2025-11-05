@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import openpyxl
 import os
+import json
 
 app = Flask(__name__)
 
@@ -99,6 +100,22 @@ def tipdress():
                         secondary_data.append(list(row))
 
     return render_template('tipdress.html', files=files, headers=headers, data=data, selected_file=selected_file, secondary_headers=secondary_headers, secondary_data=secondary_data)
+
+@app.route('/dashboard-data')
+def dashboard_data():
+    json_path = os.getenv('DASHBOARD_JSON_PATH','parameters.json')
+    if not json_path:
+        return jsonify({'error': 'DASHBOARD_JSON_PATH environment variable not set'}), 500
+    try:
+        with open(json_path, 'r') as f:
+            data = json.load(f)
+        return jsonify(data)
+    except FileNotFoundError:
+        return jsonify({'error': 'JSON file not found'}), 500
+    except json.JSONDecodeError:
+        return jsonify({'error': 'Invalid JSON format'}), 500
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

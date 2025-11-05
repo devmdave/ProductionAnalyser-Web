@@ -1,31 +1,56 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Function to generate random data for parameters
-    function updateParameters() {
-        const cycleTimeEl = document.getElementById('cycle-time');
-        const faultDelayEl = document.getElementById('fault-delay');
-        const tipDressEl = document.getElementById('tip-dress');
-        const efficiencyEl = document.getElementById('efficiency');
-        const downtimeEl = document.getElementById('downtime');
-        const outputRateEl = document.getElementById('output-rate');
-        const qualityScoreEl = document.getElementById('quality-score');
-        const energyConsumptionEl = document.getElementById('energy-consumption');
+    // Function to create and update dashboard cards from /dashboard-data endpoint
+    async function updateParameters() {
+        try {
+            const response = await fetch('/dashboard-data');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
 
-        if (cycleTimeEl) cycleTimeEl.querySelector('span').textContent = (Math.random() * 10 + 5).toFixed(2);
-        if (faultDelayEl) faultDelayEl.querySelector('span').textContent = (Math.random() * 5).toFixed(2);
-        if (tipDressEl) tipDressEl.querySelector('span').textContent = (Math.random() * 100).toFixed(1);
-        if (efficiencyEl) efficiencyEl.querySelector('span').textContent = (Math.random() * 20 + 80).toFixed(1);
-        if (downtimeEl) downtimeEl.querySelector('span').textContent = (Math.random() * 10).toFixed(1);
-        if (outputRateEl) outputRateEl.querySelector('span').textContent = (Math.random() * 50 + 100).toFixed(0);
-        if (qualityScoreEl) qualityScoreEl.querySelector('span').textContent = (Math.random() * 10 + 90).toFixed(1);
-        if (energyConsumptionEl) energyConsumptionEl.querySelector('span').textContent = (Math.random() * 20 + 50).toFixed(1);
+            const container = document.getElementById('dashboard-cards');
+            if (!container) return;
+
+            // Clear existing cards
+            container.innerHTML = '';
+
+            // Define card configurations
+            const cardConfigs = {
+                cycleTime: { label: 'Cycle Time', unit: 's', decimals: 2 },
+                faultDelay: { label: 'Fault Delay', unit: 's', decimals: 2 },
+                tipDress: { label: 'Tip Dress', unit: '%', decimals: 1 },
+                efficiency: { label: 'Efficiency', unit: '%', decimals: 1 },
+                downtime: { label: 'Downtime', unit: 'min', decimals: 1 },
+                outputRate: { label: 'Output Rate', unit: 'units/h', decimals: 0 },
+                qualityScore: { label: 'Quality Score', unit: '/100', decimals: 1 },
+                energyConsumption: { label: 'Energy Consumption', unit: 'kWh', decimals: 1 }
+            };
+
+            // Create cards for each key in data
+            for (const [key, value] of Object.entries(data)) {
+                if (cardConfigs[key] && value !== undefined) {
+                    const config = cardConfigs[key];
+                    const card = document.createElement('div');
+                    card.className = 'bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center';
+                    card.id = key;
+                    card.innerHTML = `
+                        <div class="text-lg font-semibold text-gray-900 dark:text-white">${config.label}</div>
+                        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>${value.toFixed(config.decimals)}</span> ${config.unit}</div>
+                    `;
+                    container.appendChild(card);
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching dashboard data:', error);
+        }
     }
 
     try {
         // Initial update
-         // Update parameters every 2 seconds
-        setInterval(updateParameters, 3000);
         updateParameters();
-    }catch (error) {
+        // Update parameters every 1.5 seconds
+        setInterval(updateParameters, 1500);
+    } catch (error) {
         console.error('Error updating parameters:', error);
     }
 

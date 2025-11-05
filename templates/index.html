@@ -3,39 +3,13 @@
 {% block title %}Production Analyser - Dashboard{% endblock %}
 
 {% block content %}
-<h1 class="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-white">Dashboard</h1>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-    <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center" id="cycle-time">
-        <div class="text-lg font-semibold text-gray-900 dark:text-white">Cycle Time</div>
-        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>0</span> s</div>
-    </div>
-    <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center" id="fault-delay">
-        <div class="text-lg font-semibold text-gray-900 dark:text-white">Fault Delay</div>
-        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>0</span> s</div>
-    </div>
-    <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center" id="tip-dress">
-        <div class="text-lg font-semibold text-gray-900 dark:text-white">Tip Dress</div>
-        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>0</span> %</div>
-    </div>
-    <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center" id="efficiency">
-        <div class="text-lg font-semibold text-gray-900 dark:text-white">Efficiency</div>
-        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>0</span> %</div>
-    </div>
-    <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center" id="downtime">
-        <div class="text-lg font-semibold text-gray-900 dark:text-white">Downtime</div>
-        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>0</span> min</div>
-    </div>
-    <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center" id="output-rate">
-        <div class="text-lg font-semibold text-gray-900 dark:text-white">Output Rate</div>
-        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>0</span> units/h</div>
-    </div>
-    <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center" id="quality-score">
-        <div class="text-lg font-semibold text-gray-900 dark:text-white">Quality Score</div>
-        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>0</span> /100</div>
-    </div>
-    <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center" id="energy-consumption">
-        <div class="text-lg font-semibold text-gray-900 dark:text-white">Energy Consumption</div>
-        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>0</span> kWh</div>
-    </div>
+<h1 class="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-white">
+  Dashboard
+</h1>
+<!-- Make #dashboard-cards the grid container -->
+<div id="dashboard-cards" 
+     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <!-- Dynamic cards will be injected here -->
 </div>
+
 {% endblock %}
