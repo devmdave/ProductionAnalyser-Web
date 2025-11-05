@@ -72,6 +72,8 @@ def tipdress():
     headers = []
     data = []
     selected_file = None
+    secondary_headers = []
+    secondary_data = []
 
     if request.method == 'POST':
         selected_file = request.form.get('file')
@@ -84,7 +86,19 @@ def tipdress():
                 else:
                     data.append(list(row))
 
-    return render_template('tipdress.html', files=files, headers=headers, data=data, selected_file=selected_file)
+            # Load secondary data
+            secondary_dir =  os.getenv('TIPDRESS_DATA_DIR', 'tipdress_data')
+            secondary_file_path = os.path.join(secondary_dir, selected_file)
+            if os.path.exists(secondary_file_path):
+                workbook_secondary = openpyxl.load_workbook(secondary_file_path)
+                sheet_secondary = workbook_secondary.active
+                for row in sheet_secondary.iter_rows(values_only=True):
+                    if not secondary_headers:
+                        secondary_headers = list(row)
+                    else:
+                        secondary_data.append(list(row))
+
+    return render_template('tipdress.html', files=files, headers=headers, data=data, selected_file=selected_file, secondary_headers=secondary_headers, secondary_data=secondary_data)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
