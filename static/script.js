@@ -98,6 +98,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to highlight maximum values in table columns
     function highlightMaxInColumns() {
+        //Get the input element where user enters the threshold
+        const input = document.getElementById('cycle-input');
+        // Parse the value entered into a number
+        const threshold = parseFloat(input.value);
         const tables = document.querySelectorAll('table');
         tables.forEach(table => {
             const tbody = table.querySelector('tbody');
@@ -121,17 +125,27 @@ document.addEventListener('DOMContentLoaded', function() {
                             maxValue = numValue;
                             maxCell = cell;
                         }
+                        else if (!isNaN(numValue) && numValue >= threshold && !isNaN(threshold)) {
+                            cell.classList.add('bg-yellow-500/60', 'text-yellow-900', 'font-bold');
+                        }
                     }
                 });
 
                 if (maxCell) {
-                    maxCell.classList.add('bg-red-500/40', 'text-red-900', 'font-bold', 'rounded');
+                    maxCell.classList.add('bg-red-500/60', 'text-red-900', 'font-bold');
                 }
             }
         });
     }
 
-    // Highlight max values after data updates
-    setInterval(highlightMaxInColumns, 3000);
     highlightMaxInColumns(); // Initial call
+
+    // CycleTime page specific: Highlight values above threshold
+    const highlightBtn = document.getElementById('highlight-btn');
+    highlightBtn.addEventListener('click', (e) => {
+        // Prevent default form submission (in case inside a form)
+        e.preventDefault();
+        highlightMaxInColumns();
+    })
+
 });
