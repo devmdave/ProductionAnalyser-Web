@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (cardConfigs[key] && value !== undefined) {
                     const config = cardConfigs[key];
                     const card = document.createElement('div');
-                    card.className = 'bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 text-center';
+                    card.className = 'card-bg backdrop-blur-lg rounded-xl shadow-lg p-6 text-center';
                     card.id = key;
                     card.innerHTML = `
                         <div class="text-lg font-semibold text-gray-900 dark:text-white">${config.label}</div>
