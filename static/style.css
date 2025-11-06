@@ -1,28 +1,39 @@
 /* Custom theme colors for Production Analyser Web App */
-
 :root {
-  --bg-color: #FFFFFF; /* White background */
-  --sidebar-bg: #002A4D; /* Dark blue for sidebar */
-  --sidebar-hover: #003A5D; /* Lighter blue for hover */
-  --sidebar-pressed: #001A2D; /* Darker blue for pressed */
-  --light-blue: #C6E5F5; /* Light blue for accents */
-  --selected-light-blue: #AAD8F0; /* Another light blue for selected */
-  --text-dark: #002A4D; /* Dark blue for text */
-  --card-bg: #FFFFFF; /* White for cards, or use --light-blue if preferred */
+  /* Core Theme */
+  --bg-color: #6ABBE5;              /* White background */
+  --sidebar-bg: #002A4D;            /* Dark Blue (Primary) */
+  --sidebar-hover: #003A5D;         /* Hover Blue */
+  --sidebar-pressed: #001A2D;       /* Pressed state */
+  --light-blue: #C6E5F5;            /* Light Blue accents */
+  --selected-light-blue: #6ABBE5;   /* Bright blue for selected */
+  --menu-hover: #AAD8F0;            /* Menu hover */
+  --text-dark: #002A4D;             /* Dark Blue text */
+  --card-bg: #6ABBE5;               /* Card background (white base) */
+
+  /* Status Colors */
+  --status-connected: #008000;
+  --status-disconnected: #FF0000;
+
+  /* Extras for depth */
+  --card-shadow: 0 4px 12px rgba(0, 42, 77, 0.15);
+  --card-border: 1px solid rgba(0, 42, 77, 0.1);
+  --transition-speed: 0.3s;
 }
 
-/* Dark mode overrides */
+/* Dark mode */
 .dark {
-  --bg-color: #1a1a1a; /* Dark background */
-  --sidebar-bg: #0f172a; /* Darker blue for sidebar */
-  --sidebar-hover: #1e293b; /* Lighter dark blue for hover */
-  --sidebar-pressed: #020617; /* Even darker for pressed */
-  --light-blue: #1e293b; /* Dark accent */
-  --selected-light-blue: #334155; /* Darker selected */
-  --text-dark: #f1f5f9; /* Light text */
-  --card-bg: #0f172a; /* Dark card bg */
+  --bg-color: #334155;
+  --sidebar-bg: #0f172a;
+  --sidebar-hover: #1e293b;
+  --sidebar-pressed: #020617;
+  --light-blue: #1e293b;
+  --selected-light-blue: #334155;
+  --text-dark: #ecf0f1;
+  --card-bg: #0f172a;
+  --card-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+  --card-border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 /* Body background */
 body {
   background-color: var(--bg-color) !important;
