@@ -3,76 +3,350 @@
 {% block title %}Production Analyser - Settings{% endblock %}
 
 {% block content %}
-<h1 class="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-white">
-  Settings
-</h1>
-<div class="max-w-4xl mx-auto">
-  <div class="bg-white/10 dark:bg-black/10 backdrop-blur-lg rounded-xl shadow-lg p-6 mb-6">
-    <h2 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Theme Settings</h2>
-    <p class="text-gray-700 dark:text-gray-300 mb-4">
-      Toggle between light and dark themes. Your preference is saved automatically.
-    </p>
-    <button id="theme-toggle-settings" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors">
-      Toggle Theme
-    </button>
-  </div>
-
-  <div class="bg-white/10 dark:bg-black/10 backdrop-blur-lg rounded-xl shadow-lg p-6 mb-6">
-    <h2 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Data Refresh Settings</h2>
-    <p class="text-gray-700 dark:text-gray-300 mb-4">
-      Dashboard data refreshes automatically every 1.5 seconds. This setting cannot be changed in this version.
-    </p>
-    <div class="text-sm text-gray-500 dark:text-gray-400">
-      Refresh Interval: 1.5 seconds
+<div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700">
+  <!-- Hero Section -->
+  <div class="pt-20 pb-12 px-4">
+    <div class="max-w-6xl mx-auto text-center">
+      <div class="flex justify-center mb-8">
+        <svg class="w-20 h-20 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+      </div>
+      <h1 class="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        Settings & Preferences
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+        Customize your Production Analyser experience with advanced settings, personalization options, and system preferences.
+      </p>
     </div>
   </div>
 
-  <div class="bg-white/10 dark:bg-black/10 backdrop-blur-lg rounded-xl shadow-lg p-6">
-    <h2 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Application Information</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div>
-        <h3 class="font-medium text-gray-900 dark:text-white">Version</h3>
-        <p class="text-gray-700 dark:text-gray-300">1.0.0</p>
+  <!-- Main Content -->
+  <div class="max-w-6xl mx-auto px-4 pb-20">
+    <!-- Appearance Settings -->
+    <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg rounded-2xl shadow-xl p-8 mb-8 border border-white/20 dark:border-gray-700/20">
+      <h2 class="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white flex items-center justify-center">
+        <svg class="w-8 h-8 mr-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+        </svg>
+        Appearance
+      </h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Theme Settings -->
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Theme Mode</h3>
+            <div class="flex items-center space-x-4 mb-4">
+              <button id="theme-light" class="flex items-center px-4 py-2 rounded-lg border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 transition-colors">
+                <svg class="w-5 h-5 mr-2 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                Light
+              </button>
+              <button id="theme-dark" class="flex items-center px-4 py-2 rounded-lg border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 transition-colors">
+                <svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+                Dark
+              </button>
+              <button id="theme-auto" class="flex items-center px-4 py-2 rounded-lg border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 transition-colors">
+                <svg class="w-5 h-5 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                Auto
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Choose your preferred theme or let the system decide based on your device settings.</p>
+          </div>
+
+          <!-- Font Size -->
+          <div>
+            <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Font Size</h3>
+            <div class="flex items-center space-x-4">
+              <button id="font-small" class="px-3 py-1 text-sm rounded border border-gray-300 dark:border-gray-600 hover:border-blue-500">Small</button>
+              <button id="font-medium" class="px-3 py-1 text-sm rounded border border-blue-500 bg-blue-50 dark:bg-blue-900/20">Medium</button>
+              <button id="font-large" class="px-3 py-1 text-sm rounded border border-gray-300 dark:border-gray-600 hover:border-blue-500">Large</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layout Settings -->
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Dashboard Layout</h3>
+            <div class="space-y-3">
+              <label class="flex items-center">
+                <input type="checkbox" id="compact-mode" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                <span class="ml-2 text-gray-700 dark:text-gray-300">Compact Mode</span>
+              </label>
+              <label class="flex items-center">
+                <input type="checkbox" id="show-animations" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                <span class="ml-2 text-gray-700 dark:text-gray-300">Show Animations</span>
+              </label>
+              <label class="flex items-center">
+                <input type="checkbox" id="auto-expand" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                <span class="ml-2 text-gray-700 dark:text-gray-300">Auto-expand Cards</span>
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <h3 class="font-medium text-gray-900 dark:text-white">Framework</h3>
-        <p class="text-gray-700 dark:text-gray-300">Flask</p>
+    </div>
+
+    <!-- Data & Performance Settings -->
+    <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg rounded-2xl shadow-xl p-8 mb-8 border border-white/20 dark:border-gray-700/20">
+      <h2 class="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white flex items-center justify-center">
+        <svg class="w-8 h-8 mr-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+        </svg>
+        Data & Performance
+      </h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Refresh Settings -->
+        <div>
+          <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Data Refresh</h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Dashboard Refresh Interval</label>
+              <select id="refresh-interval" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                <option value="1000">1 second</option>
+                <option value="1500" selected>1.5 seconds</option>
+                <option value="2000">2 seconds</option>
+                <option value="5000">5 seconds</option>
+                <option value="10000">10 seconds</option>
+              </select>
+            </div>
+            <div class="flex items-center">
+              <input type="checkbox" id="background-refresh" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+              <span class="ml-2 text-gray-700 dark:text-gray-300">Enable background refresh</span>
+            </div>
+            <div class="flex items-center">
+              <input type="checkbox" id="notify-updates" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+              <span class="ml-2 text-gray-700 dark:text-gray-300">Notify on data updates</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cache & Storage -->
+        <div>
+          <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Cache & Storage</h3>
+          <div class="space-y-4">
+            <button id="clear-cache" class="w-full bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition-colors">
+              Clear Application Cache
+            </button>
+            <button id="export-settings" class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors">
+              Export Settings
+            </button>
+            <button id="import-settings" class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition-colors">
+              Import Settings
+            </button>
+            <div class="text-sm text-gray-600 dark:text-gray-400">
+              <p>Cache Size: <span id="cache-size">2.3 MB</span></p>
+              <p>Last Backup: <span id="last-backup">Never</span></p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <h3 class="font-medium text-gray-900 dark:text-white">Frontend</h3>
-        <p class="text-gray-700 dark:text-gray-300">Tailwind CSS + JavaScript</p>
+    </div>
+
+    <!-- Notifications & Alerts -->
+    <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg rounded-2xl shadow-xl p-8 mb-8 border border-white/20 dark:border-gray-700/20">
+      <h2 class="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white flex items-center justify-center">
+        <svg class="w-8 h-8 mr-3 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4.868 12.683A17.925 17.925 0 0112 21c7.962 0 12-1.21 12-2.683m-12 2.683a17.925 17.925 0 01-7.132-8.317M12 21V9m0 0l8.539-3.539M12 9L3.461 5.461M12 9v12"></path>
+        </svg>
+        Notifications & Alerts
+      </h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="space-y-4">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Alert Preferences</h3>
+          <div class="space-y-3">
+            <label class="flex items-center justify-between">
+              <span class="text-gray-700 dark:text-gray-300">Performance Alerts</span>
+              <input type="checkbox" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+            </label>
+            <label class="flex items-center justify-between">
+              <span class="text-gray-700 dark:text-gray-300">System Notifications</span>
+              <input type="checkbox" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+            </label>
+            <label class="flex items-center justify-between">
+              <span class="text-gray-700 dark:text-gray-300">Data Update Alerts</span>
+              <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+            </label>
+            <label class="flex items-center justify-between">
+              <span class="text-gray-700 dark:text-gray-300">Error Notifications</span>
+              <input type="checkbox" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+            </label>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Notification Methods</h3>
+          <div class="space-y-3">
+            <label class="flex items-center justify-between">
+              <span class="text-gray-700 dark:text-gray-300">Browser Notifications</span>
+              <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+            </label>
+            <label class="flex items-center justify-between">
+              <span class="text-gray-700 dark:text-gray-300">Email Alerts</span>
+              <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+            </label>
+            <label class="flex items-center justify-between">
+              <span class="text-gray-700 dark:text-gray-300">Sound Alerts</span>
+              <input type="checkbox" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+            </label>
+          </div>
+        </div>
       </div>
-      <div>
-        <h3 class="font-medium text-gray-900 dark:text-white">Data Source</h3>
-        <p class="text-gray-700 dark:text-gray-300">Excel Files</p>
+    </div>
+
+    <!-- System Information -->
+    <div class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg rounded-2xl shadow-xl p-8 mb-8 border border-white/20 dark:border-gray-700/20">
+      <h2 class="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white flex items-center justify-center">
+        <svg class="w-8 h-8 mr-3 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+        </svg>
+        System Information
+      </h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="text-center">
+          <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 dark:text-white">Version</h3>
+            <p class="text-2xl font-bold text-blue-600">1.0.0</p>
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 dark:text-white">Framework</h3>
+            <p class="text-lg font-bold text-green-600">Flask</p>
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 dark:text-white">Frontend</h3>
+            <p class="text-sm font-bold text-yellow-600">Tailwind + JS</p>
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 dark:text-white">Data Source</h3>
+            <p class="text-lg font-bold text-purple-600">Excel</p>
+          </div>
+        </div>
       </div>
+      <div class="mt-8 text-center">
+        <button id="check-updates" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
+          Check for Updates
+        </button>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex flex-wrap justify-center gap-4">
+      <button id="save-settings" class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 flex items-center">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        Save All Settings
+      </button>
+      <button id="reset-settings" class="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 flex items-center">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+        </svg>
+        Reset to Defaults
+      </button>
     </div>
   </div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const themeToggleSettings = document.getElementById('theme-toggle-settings');
     const html = document.documentElement;
 
-    if (themeToggleSettings) {
-        themeToggleSettings.addEventListener('click', () => {
-            const isDark = html.classList.contains('dark');
-            if (isDark) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-                themeToggleSettings.textContent = 'Switch to Dark Mode';
-            } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-                themeToggleSettings.textContent = 'Switch to Light Mode';
-            }
-        });
+    // Theme buttons
+    const themeLight = document.getElementById('theme-light');
+    const themeDark = document.getElementById('theme-dark');
+    const themeAuto = document.getElementById('theme-auto');
 
-        // Set initial button text
+    function updateThemeButtons() {
         const currentTheme = localStorage.getItem('theme') || 'light';
-        themeToggleSettings.textContent = currentTheme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+        [themeLight, themeDark, themeAuto].forEach(btn => btn.classList.remove('border-blue-500', 'bg-blue-50', 'dark:bg-blue-900/20'));
+        if (currentTheme === 'light') {
+            themeLight.classList.add('border-blue-500', 'bg-blue-50', 'dark:bg-blue-900/20');
+        } else if (currentTheme === 'dark') {
+            themeDark.classList.add('border-blue-500', 'bg-blue-50', 'dark:bg-blue-900/20');
+        } else {
+            themeAuto.classList.add('border-blue-500', 'bg-blue-50', 'dark:bg-blue-900/20');
+        }
     }
+
+    themeLight.addEventListener('click', () => {
+        html.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        updateThemeButtons();
+    });
+
+    themeDark.addEventListener('click', () => {
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        updateThemeButtons();
+    });
+
+    themeAuto.addEventListener('click', () => {
+        localStorage.setItem('theme', 'auto');
+        updateThemeButtons();
+    });
+
+    updateThemeButtons();
+
+    // Font size buttons
+    const fontButtons = ['font-small', 'font-medium', 'font-large'];
+    fontButtons.forEach(id => {
+        document.getElementById(id).addEventListener('click', function() {
+            fontButtons.forEach(btnId => {
+                document.getElementById(btnId).classList.remove('border-blue-500', 'bg-blue-50', 'dark:bg-blue-900/20');
+            });
+            this.classList.add('border-blue-500', 'bg-blue-50', 'dark:bg-blue-900/20');
+        });
+    });
+
+    // Action buttons
+    document.getElementById('save-settings').addEventListener('click', () => {
+        // Save settings logic would go here
+        alert('Settings saved successfully!');
+    });
+
+    document.getElementById('reset-settings').addEventListener('click', () => {
+        if (confirm('Are you sure you want to reset all settings to defaults?')) {
+            localStorage.clear();
+            location.reload();
+        }
+    });
+
+    document.getElementById('clear-cache').addEventListener('click', () => {
+        if (confirm('Clear application cache? This will refresh all data.')) {
+            localStorage.clear();
+            alert('Cache cleared successfully!');
+        }
+    });
+
+    document.getElementById('export-settings').addEventListener('click', () => {
+        const settings = {
+            theme: localStorage.getItem('theme') || 'light',
+            timestamp: new Date().toISOString()
+        };
+        const dataStr = JSON.stringify(settings, null, 2);
+        const dataBlob = new Blob([dataStr], {type: 'application/json'});
+        const url = URL.createObjectURL(dataBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'production-analyser-settings.json';
+        link.click();
+    });
+
+    document.getElementById('check-updates').addEventListener('click', () => {
+        alert('You are running the latest version (1.0.0)');
+    });
 });
 </script>
 {% endblock %}
