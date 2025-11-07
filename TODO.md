@@ -1,1 +1,5 @@
 - [x] Add "Analytics" dropdown menu in the navbar in templates/base.html, grouping CycleTime, FaultDelay, and TipDress links.
+- [x] Add Dashboard link to navbar (pointing to /)
+- [x] Add About link to navbar
+- [x] Add Settings link to navbar
+- [x] Update mobile menu to include new links
