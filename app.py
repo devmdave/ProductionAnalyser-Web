@@ -100,6 +100,14 @@ def tipdress():
 
     return render_template('tipdress.html', files=files, headers=headers, data=data, selected_file=selected_file, secondary_headers=secondary_headers, secondary_data=secondary_data)
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
+
 @app.route('/dashboard-data')
 def dashboard_data():
     json_path = os.getenv('DASHBOARD_JSON_PATH','parameters.json')

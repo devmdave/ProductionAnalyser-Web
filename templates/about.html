@@ -1,0 +1,37 @@
+ {% extends "base.html" %}
+
+{% block title %}Production Analyser - About{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-white">
+  About Production Analyser
+</h1>
+<div class="max-w-4xl mx-auto text-gray-900 dark:text-white">
+  <p class="mb-4">
+    Production Analyser is a comprehensive web application designed to provide detailed analytics and insights into production processes.
+  </p>
+  <p class="mb-4">
+    This tool helps monitor and analyze key performance indicators such as cycle times, fault delays, and tip dress efficiency across various production lines.
+  </p>
+  <h2 class="text-2xl font-semibold mb-4">Features</h2>
+  <ul class="list-disc list-inside mb-4 space-y-2">
+    <li>Real-time dashboard with key metrics</li>
+    <li>CycleTime Backup Analytics</li>
+    <li>FaultDelay Backup Analytics</li>
+    <li>TipDress Backup Analytics</li>
+    <li>Interactive data visualization</li>
+    <li>Dark/Light theme support</li>
+    <li>Mobile-responsive design</li>
+  </ul>
+  <h2 class="text-2xl font-semibold mb-4">Technology Stack</h2>
+  <ul class="list-disc list-inside mb-4 space-y-2">
+    <li>Backend: Flask (Python)</li>
+    <li>Frontend: HTML, CSS (Tailwind CSS), JavaScript</li>
+    <li>Data Processing: OpenPyXL for Excel file handling</li>
+    <li>Styling: Tailwind CSS with dark mode support</li>
+  </ul>
+  <p class="mb-4">
+    Built with modern web technologies to ensure fast, reliable, and user-friendly experience.
+  </p>
+</div>
+{% endblock %}
