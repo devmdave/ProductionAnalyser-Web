@@ -2,9 +2,6 @@
 :root {
   /* Core Theme */
   --bg-color: #6ABBE5;              /* White background */
-  --sidebar-bg: #002A4D;            /* Dark Blue (Primary) */
-  --sidebar-hover: #003A5D;         /* Hover Blue */
-  --sidebar-pressed: #001A2D;       /* Pressed state */
   --light-blue: #C6E5F5;            /* Light Blue accents */
   --selected-light-blue: #6ABBE5;   /* Bright blue for selected */
   --menu-hover: #AAD8F0;            /* Menu hover */
@@ -24,9 +21,6 @@
 /* Dark mode */
 .dark {
   --bg-color: #334155;
-  --sidebar-bg: #0f172a;
-  --sidebar-hover: #1e293b;
-  --sidebar-pressed: #020617;
   --light-blue: #1e293b;
   --selected-light-blue: #334155;
   --text-dark: #ecf0f1;
@@ -37,19 +31,6 @@
 /* Body background */
 body {
   background-color: var(--bg-color) !important;
-}
-
-/* Sidebar */
-.sidebar-bg {
-  background-color: var(--sidebar-bg) !important;
-}
-
-.sidebar-text {
-  color: var(--bg-color) !important;
-}
-
-.sidebar-link:hover {
-  background-color: var(--sidebar-hover) !important;
 }
 
 /* Menu toggle button */
