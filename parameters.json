@@ -1,10 +1,10 @@
 {
-  "cycleTime": 14.15,
-  "faultDelay": 1.3,
-  "tipDress": 5.3,
-  "efficiency": 74.8,
-  "downtime": 5.3,
-  "outputRate": 114,
-  "qualityScore": 91.3,
-  "energyConsumption": 40.8
+  "cycleTime": 12.75,
+  "faultDelay": 2.05,
+  "tipDress": 6.3,
+  "efficiency": 78.4,
+  "downtime": 9.5,
+  "outputRate": 106,
+  "qualityScore": 96.3,
+  "energyConsumption": 51.5
 }
