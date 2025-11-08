@@ -63,12 +63,12 @@ class pycomm3:
         tags_data = {}
         try:
             # Read set_names_tags.json
-            set_file_path = "plc_custom_user_tags\\set_names_tags.json"
+            set_file_path = "config/plc_custom_user_tags/set_names_tags.json"
             with open(set_file_path, "r") as file:
                 set_data = json.load(file)
 
             # Read actual_names_tags.json
-            actual_file_path = "plc_custom_user_tags\\actual_names_tags.json"
+            actual_file_path = "config/plc_custom_user_tags/actual_names_tags.json"
             with open(actual_file_path, "r") as file:
                 actual_data = json.load(file)
 

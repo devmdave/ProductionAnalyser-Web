@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template,redirect, request,url_for, jsonify
 import openpyxl
 import os
 import json
@@ -114,6 +114,36 @@ def about():
 def settings():
     return render_template('settings.html')
 
+@app.route('/start')
+def loading():
+    data = request.args.get('data')
+    if data == 'cycletime':
+        # Render the loading page
+        return render_template('loading_cycletime.html')
+    elif data == 'faultdelay':
+        return render_template('loading_faultdelay.html')
+    
+@app.route('/fetch-cycletime')
+def fetch_cycletime():
+    plc = pycomm3()
+    tags_data = plc.read_cycletime_tags()
+    dw = data_writer()
+    dw.write_to_excel(tags_data, data_writer.CYCLETIME_BACKUP_DIR)
+    # Redirect to main page
+    return redirect(url_for('current_cycletime'))
+
+@app.route('/fetch-faultdelay')
+def fetch_faultdelay():
+    plc = pycomm3()
+    tags_data = plc.read_station_fault_tags()
+    dw = data_writer()
+    dw.write_to_excel(tags_data, data_writer.CYCLETIME_BACKUP_DIR)
+    # Redirect to main page
+    return redirect(url_for('current_faultdelay'))
+
+
+
+
 @app.route('/dashboard-data')
 def dashboard_data():
     json_path = os.getenv('DASHBOARD_JSON_PATH','parameters.json')
@@ -133,11 +163,6 @@ def dashboard_data():
 @app.route('/current-cycletime-data')
 def current_cycletime():
     try:
-        plc = pycomm3()
-        tags_data = plc.read_cycletime_tags()
-        dw = data_writer()
-        dw.write_to_excel(tags_data, data_writer.CYCLETIME_BACKUP_DIR)
-        
         headers = []
         data = []
                
@@ -155,19 +180,19 @@ def current_cycletime():
     except Exception as e:
         return jsonify({'error': e.__str__}), 500
     
-# @app.route('/current-faultdelay-data')
-# def current_faultdelay():
-#     try:
-#         with open('currentfaultdelay.json', 'r') as f:
-#             data = json.load(f)
-#         fault_delay = data.get('faultDelay')
-#         return render_template('current_faultdelay.html', fault_delay=fault_delay)
-#     except FileNotFoundError:
-#         return jsonify({'error': 'currentfaultdelay.json file not found'}), 500
-#     except json.JSONDecodeError:
-#         return jsonify({'error': 'Invalid JSON in currentfaultdelay.json'}), 500
-#     except Exception as e:
-#         return jsonify({'error': str(e)}), 500
+@app.route('/current-faultdelay-data')
+def current_faultdelay():
+    try:
+        with open('currentfaultdelay.json', 'r') as f:
+            data = json.load(f)
+        fault_delay = data.get('faultDelay')
+        return render_template('current_faultdelay.html', fault_delay=fault_delay)
+    except FileNotFoundError:
+        return jsonify({'error': 'currentfaultdelay.json file not found'}), 500
+    except json.JSONDecodeError:
+        return jsonify({'error': 'Invalid JSON in currentfaultdelay.json'}), 500
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

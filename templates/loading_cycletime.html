@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta http-equiv="refresh" content="0.1;url={{ url_for('fetch_cycletime') }}">
+    <!-- Insert redirect script here if needed, e.g., <meta http-equiv="refresh" content="3;url=/dashboard"> -->
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="text-center">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid mx-auto mb-4"></div>
+        <p class="text-gray-700 text-lg font-medium">Fetching data from Server, please wait...</p>
+    </div>
+</body>
+</html>

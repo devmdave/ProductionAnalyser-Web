@@ -4,7 +4,7 @@ import time
 from mock_plc import pycomm3
 
 plc = pycomm3()
-print(plc.read_cycletime_tags())
+print(plc.read_station_fault_tags())
 
 
 
