@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Production Analyser - CycleTime Backup Analytics{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-white">CycleTime Backup Analytics</h1>
+<p class="text-gray-700 dark:text-gray-300 mb-6 text-center">Detailed analysis of cycle times.</p>
+
+
+<!-- File Selection -->
+<!-- <div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6 mb-6">
+    <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Select Excel File</h2>
+    <form id="cycle-form" method="POST" class="flex flex-col sm:flex-row gap-4">
+        <select name="file" class="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white/50 dark:bg-gray-700/50 text-gray-900 dark:text-white">
+            <option value="">Choose a file...</option>
+            {% for file in files %}
+            <option value="{{ file }}" {% if selected_file == file %}selected{% endif %}>{{ file }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Load Data</button>
+    </form>
+</div> -->
+
+<!-- Data Table -->
+{% if headers %}
+<div class="bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg rounded-xl shadow-lg p-6">
+    <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Cycle Time Data - {{ selected_file }}</h2>
+    <!-- Highlight Input -->
+    <div class="mb-4 flex items-center">
+        <input type="number" id="cycle-input" placeholder="Enter cycle time threshold" class="border rounded px-3 py-2 bg-white/20 backdrop-blur-md text-gray-900 dark:text-white">
+        <button id="highlight-btn" class="ml-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded">Highlight Values</button>
+    </div>
+    <div class="overflow-x-auto">
+        <table id="cycle-table" class="min-w-full table-auto border-collapse border border-gray-300 dark:border-gray-600">
+            <thead class="bg-gray-50/50 dark:bg-gray-700/50">
+                <tr>
+                    {% for header in headers %}
+                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider border-b border-gray-300 dark:border-gray-600">{{ header }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody class="bg-white/50 dark:bg-gray-800/50 divide-y divide-gray-200 dark:divide-gray-600">
+                {% for row in data %}
+                <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-700/50">
+                    {% for cell in row %}
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 border-b border-gray-300 dark:border-gray-600{% if loop.first %} cycle-time-cell{% endif %}">{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+

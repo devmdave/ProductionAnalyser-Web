@@ -1,5 +1,6 @@
-- [x] Add "Analytics" dropdown menu in the navbar in templates/base.html, grouping CycleTime, FaultDelay, and TipDress links.
-- [x] Add Dashboard link to navbar (pointing to /)
-- [x] Add About link to navbar
-- [x] Add Settings link to navbar
-- [x] Update mobile menu to include new links
+# TODO List for Adding Current CycleTime and FaultDelay Routes
+
+- [x] Add `/current-cycletime` route to app.py
+- [x] Add `/current-faultdelay` route to app.py
+- [x] Create `current_cycletime.html` template
+- [x] Create `current_faultdelay.html` template

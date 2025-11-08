@@ -2,6 +2,12 @@ from flask import Flask, render_template, request, jsonify
 import openpyxl
 import os
 import json
+from mock_plc import pycomm3
+from my_plc import data_writer 
+from datetime import datetime
+
+
+
 
 app = Flask(__name__)
 
@@ -123,6 +129,45 @@ def dashboard_data():
         return jsonify({'error': 'Invalid JSON format'}), 500
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@app.route('/current-cycletime-data')
+def current_cycletime():
+    try:
+        plc = pycomm3()
+        tags_data = plc.read_cycletime_tags()
+        dw = data_writer()
+        dw.write_to_excel(tags_data, data_writer.CYCLETIME_BACKUP_DIR)
+        
+        headers = []
+        data = []
+               
+        today = datetime.today()
+        filename = today.strftime("%d-%m-%Y")+".xlsx".replace(" ", "")
+        workbook = openpyxl.load_workbook(os.path.join(data_writer.CYCLETIME_BACKUP_DIR, filename))
+        sheet = workbook.active
+        for row in sheet.iter_rows(values_only=True):
+            if not headers:
+                headers = list(row)
+            else:
+                data.append(list(row))
+
+        return render_template('current_cycletime.html', headers=headers, data=data, selected_file=filename)
+    except Exception as e:
+        return jsonify({'error': e.__str__}), 500
+    
+# @app.route('/current-faultdelay-data')
+# def current_faultdelay():
+#     try:
+#         with open('currentfaultdelay.json', 'r') as f:
+#             data = json.load(f)
+#         fault_delay = data.get('faultDelay')
+#         return render_template('current_faultdelay.html', fault_delay=fault_delay)
+#     except FileNotFoundError:
+#         return jsonify({'error': 'currentfaultdelay.json file not found'}), 500
+#     except json.JSONDecodeError:
+#         return jsonify({'error': 'Invalid JSON in currentfaultdelay.json'}), 500
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

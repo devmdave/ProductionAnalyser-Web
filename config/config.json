@@ -1,0 +1,36 @@
+{
+    "parameters": [
+        {
+            "name": "Shift A Production",
+            "value": "SHIFT_A_PROD"
+        },
+        {
+            "name": "Shift B Production",
+            "value": "SHIFT_A_PROD"
+        },
+        {
+            "name": "SHIFT_C_PROD",
+            "value": "SHIFT_A_PROD"
+        },
+        {
+            "name": "SHIFT_D_PROD",
+            "value": "SHIFT_A_PROD"
+        },
+        {
+            "name": "SHIFT_E_PROD",
+            "value": "SHIFT_A_PROD"
+        },
+        {
+            "name": "SHIFT_F_PROD",
+            "value": "SHIFT_A_PROD"
+        },
+        {
+            "name": "SHIFT_G_PROD",
+            "value": "SHIFT_A_PROD"
+        },
+        {
+            "name": "SHIFT_H_PROD",
+            "value": "SHIFT_A_PROD"
+        }
+    ]
+}
