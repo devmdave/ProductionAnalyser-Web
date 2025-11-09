@@ -1,7 +1,7 @@
 /* Custom theme colors for Production Analyser Web App */
 :root {
   /* Core Theme */
-  --bg-color: #6ABBE5;              /* White background */
+  --bg-color: #e56a6a;              /* White background */
   --light-blue: #C6E5F5;            /* Light Blue accents */
   --selected-light-blue: #6ABBE5;   /* Bright blue for selected */
   --menu-hover: #AAD8F0;            /* Menu hover */
@@ -31,6 +31,13 @@
 /* Body background */
 body {
   background-color: var(--bg-color) !important;
+}
+
+.space-grotesk-font{
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* Menu toggle button */

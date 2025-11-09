@@ -1,6 +1,4 @@
-# TODO List for Adding Current CycleTime and FaultDelay Routes
+# TODO List for Adding "Current Analytics" Dropdown to Navbar
 
-- [x] Add `/current-cycletime` route to app.py
-- [x] Add `/current-faultdelay` route to app.py
-- [x] Create `current_cycletime.html` template
-- [x] Create `current_faultdelay.html` template
+- [x] Edit `templates/base.html` to add a new dropdown named "Current Analytics" after the existing "Analytics" dropdown, containing links to "Current Cycletime" (/current-cycletime-data) and "Current FaultDelay" (/current-faultdelay-data).
+- [x] Update the mobile menu in `templates/base.html` to include the new links under "Current Analytics".

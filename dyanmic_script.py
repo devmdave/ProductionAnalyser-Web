@@ -2,9 +2,12 @@ import json
 import random
 import time
 from mock_plc import pycomm3
-
+from my_plc import data_writer
 plc = pycomm3()
-print(plc.read_station_fault_tags())
+tags_data = plc.read_station_fault_tags()
+data_writer = data_writer()
+data_writer.write_to_excel(tags_data, data_writer.FAULT_DELAY_BACKUP_DIR)
+
 
 
 

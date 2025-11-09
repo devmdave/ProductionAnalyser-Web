@@ -31,11 +31,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (cardConfigs[key] && value !== undefined) {
                     const config = cardConfigs[key];
                     const card = document.createElement('div');
-                    card.className = 'card-bg backdrop-blur-lg rounded-xl shadow-lg p-6 text-center';
+                    card.className = 'flex flex-col gap-2 rounded-xl bg-[#2D3748] p-6 transition-all hover:bg-[#3b4754]';
                     card.id = key;
                     card.innerHTML = `
-                        <div class="text-lg font-semibold text-gray-900 dark:text-white">${config.label}</div>
-                        <div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>${value.toFixed(config.decimals)}</span> ${config.unit}</div>
+                        <p class="text-white/70 text-base font-medium leading-normal">
+                        ${config.label}
+                        </p>
+                        <p class="text-white tracking-light text-4xl font-bold leading-tight">
+                            ${value.toFixed(config.decimals)} ${config.unit}
+                        </p>
+                        <p class="flex items-center gap-1 text-[#E53E3E] text-sm font-medium leading-normal">
+                            <span class="material-symbols-outlined text-base">
+                                arrow_upward
+                            </span
+                            <span>+0.1s vs avg</span>
+                        </p>
                     `;
                     container.appendChild(card);
                 }
@@ -174,3 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
 });
+
+
+{/* <div class="text-lg font-semibold text-gray-900 dark:text-white">${config.label}</div>
+<div class="text-2xl font-bold text-gray-900 dark:text-white mt-2"><span>${value.toFixed(config.decimals)}</span> ${config.unit}</div> */}
